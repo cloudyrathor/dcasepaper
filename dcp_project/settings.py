@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'dcp_api',
 ]
 
 MIDDLEWARE = [
@@ -85,13 +87,9 @@ DATABASES = {
 'NAME': 'dcp_db',
 'USER': 'django',
 'PASSWORD': 'django',
-'HOST': '',
-'PORT': '',
-'OPTIONS': {
-'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
 }
 }
-}
+
 
 
 # Password validation
