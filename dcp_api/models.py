@@ -8,13 +8,13 @@ class pat_profile_table(models.Model):
     p_address = models.CharField(max_length=128)
     p_email = models.EmailField()
     p_mobile = models.CharField(max_length=10)
-    p_aniversary = models.DateField()
+    p_anniversary = models.DateField()
 
 class med_profile_table(models.Model):
     p_id = models.IntegerField()
     p_habbit = models.CharField(max_length=128)
-    p_level_of_higine = models.CharField(max_length=64)
-    p_cosmatic_concern = models.CharField(max_length=128)
+    p_level_of_higgins = models.CharField(max_length=64)
+    p_cosmetic_concern = models.CharField(max_length=128)
     p_medical_history = models.CharField(max_length=1024)
 
 class pat_treatment_history_table(models.Model):
