@@ -22,15 +22,15 @@ def phonenumbergen():
 def populate(n):
     for i in range(n):
         pat_id = fake.random_int(min=1,max=999)
-        pat_fname = fake.name()
+        pat_name = fake.name()
         pat_dob = fake.date()
         pat_address = fake.address()
         pat_email = fake.address()
         pat_mobile = phonenumbergen()
-        pat_aniversary = fake.date()
+        pat_anniversary = fake.date()
         pat_habbit = fake.random_element(elements = ('Nail biting','Brushing hard','Grinding','chewing ice cube','constant snaking','using teeth as tool'))
-        pat_level_of_higine = fake.random_element(elements = ('Proper brushing','Flossing','Avoid Tobacco','Limit Sodas','Limit Coffee','Limit Alcohol','Consume Calsium','Regular Mouth wash'))
-        pat_cosmatic_concern = fake.random_element(elements = ('Teeth whitening','Bonding','Veneers','Crowns','Enamel Shaping and contouring','Braces','Bridges','Implant'))
+        pat_level_of_higgins = fake.random_element(elements = ('Proper brushing','Flossing','Avoid Tobacco','Limit Sodas','Limit Coffee','Limit Alcohol','Consume Calsium','Regular Mouth wash'))
+        pat_cosmetic_concern = fake.random_element(elements = ('Teeth whitening','Bonding','Veneers','Crowns','Enamel Shaping and contouring','Braces','Bridges','Implant'))
         pat_medical_history = fake.random_element(elements = ('Cardiovascular','Respiratory','Gastrointestinal','Hepatic','Neurological','Musculoskeletal','Drug history','Allergy'))
         doc_id = fake.random_int(min=1,max=20)
         doc_id_treated_by = doc_id
@@ -41,19 +41,19 @@ def populate(n):
         treatment_name = fake.random_element(elements = ('Teeth whitening','Bonding','Veneers','Crowns','Enamel Shaping and contouring','Braces','Bridges','Implant'))
         # =====================pat_profile_table================================================================================================
         pat_profile_table_data = pat_profile_table.objects.get_or_create(p_id = pat_id,
-                                                           p_name = pat_fname,
+                                                           p_name = pat_name,
                                                            p_dob = pat_dob,
                                                            p_address = pat_address,
                                                            p_email = pat_email,
                                                            p_mobile = pat_mobile,
-                                                           p_aniversary = pat_aniversary)
+                                                           p_anniversary = pat_anniversary)
         # =======================================================================================================================
 
         # =====================med_profile_table=================================================================================
         med_profile_table_data = med_profile_table.objects.get_or_create(p_id=pat_id,
                                                                          p_habbit=pat_habbit,
-                                                                         p_level_of_higine=pat_level_of_higine,
-                                                                         p_cosmatic_concern=pat_cosmatic_concern,
+                                                                         p_level_of_higgins=pat_level_of_higgins,
+                                                                         p_cosmetic_concern=pat_cosmetic_concern,
                                                                          p_medical_history=pat_medical_history)
 
         # =======================================================================================================================
