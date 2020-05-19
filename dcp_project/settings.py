@@ -25,7 +25,7 @@ SECRET_KEY = '#&h@6=k(66s^f@_t!ehj2vhi(9#@ia2+w*1uk)6l7%woe+3_-a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dcpapi.pythonanywhere.com']
+ALLOWED_HOSTS = ['woxino2096.pythonanywhere.com'] #to be changed as per corrent user name
 
 
 # Application definition
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'dcp_project.urls'
+ROOT_URLCONF = 'dcp_project.urls' #to be changed as per corrent user name
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'dcp_project.wsgi.application'
+WSGI_APPLICATION = 'dcp_project.wsgi.application' #to be changed as per corrent user name
 
 
 # Database
@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'dcp_project.wsgi.application'
 DATABASES = {
 'default': {
 'ENGINE': 'django.db.backends.mysql',
-'NAME': 'dcpapi$dcasepaperdb',
-'USER': 'dcpapi',
+'NAME': 'woxino2096$dcasepaperdb', #to be changed as per corrent user name
+'USER': 'woxino2096', #to be changed as per corrent user name
 'PASSWORD': 'root@123',
-'HOST': 'dcpapi.mysql.pythonanywhere-services.com',
+'HOST': 'woxino2096.mysql.pythonanywhere-services.com', #to be changed as per corrent user name
 'PORT': '',
 'OPTIONS': {
 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
