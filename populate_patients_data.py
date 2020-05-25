@@ -6,7 +6,6 @@ import django,json,requests
 # from dcp_api.models import pat_profile_table,med_profile_table,pat_treatment_history_table,treatment_plan_table
 
 
-
 from faker import Faker
 from random import *
 fake = Faker()
@@ -101,9 +100,9 @@ def send_data(prejson):
 # ===================calling function for populating data===================
 no_of_data = 5
 populate_pat_profile_table(no_of_data)
-populate_med_profile_table(no_of_data)
-populate_pat_treatment_history_table(no_of_data)
-populate_treatment_plan_table(no_of_data)
+#populate_med_profile_table(no_of_data)
+#populate_pat_treatment_history_table(no_of_data)
+#populate_treatment_plan_table(no_of_data)
 
 
 
