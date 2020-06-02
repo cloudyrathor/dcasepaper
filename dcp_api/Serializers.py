@@ -12,16 +12,21 @@ class doc_profile_tableSerializer(serializers.ModelSerializer):
         fields = '__all__'       
 
 class treatment_plan_tableSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = treatment_plan_table
         fields = '__all__'             
 
 class med_profile_tableSerializer(serializers.ModelSerializer):
+    p = pat_profile_tableSerializer(read_only=True)
     class Meta:
         model = med_profile_table
         fields = '__all__'
 
 class pat_treatment_history_tableSerializer(serializers.ModelSerializer):
+    p = pat_profile_tableSerializer(read_only=True)
+    d = doc_profile_tableSerializer(read_only=True)
+    t = treatment_plan_tableSerializer(read_only=True) 
     class Meta:
         model = pat_treatment_history_table
         fields = '__all__'
