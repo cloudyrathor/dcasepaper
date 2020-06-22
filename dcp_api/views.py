@@ -43,16 +43,13 @@ class RUD_Treatment(generics.RetrieveUpdateDestroyAPIView):#Doctor #Single objec
     serializer_class = treatment_plan_tableSerializer
     
 class Post_Patient_Treatment_History(generics.ListCreateAPIView):#Patient_History #Single object insert Done + GET(List of Object's for p_id)
-    queryset = pat_treatment_history_table.objects.all()
+    queryset = PatientTreatmentWorkdone.objects.all()
     serializer_class = pat_treatment_history_tableSerializer
+   
     filter_backends = (DjangoFilterBackend,OrderingFilter,)
     ordering = ('visit_date',)
     filter_fields = ('p_id','d_id','t_id','d__d_name')
 
-
-
-
-    
 # class RUD_Patient_Treatment_History(generics.RetrieveUpdateDestroyAPIView):#Patient_History #Single object GET + Update (PUT) + Delete
 #     queryset = pat_treatment_history_table.objects.all()
 #     serializer_class = pat_treatment_history_tableSerializer

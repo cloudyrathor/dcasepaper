@@ -16,7 +16,7 @@ urlpatterns = [
 
 #In_Process
     path('patient-treatment-history/',Post_Patient_Treatment_History.as_view(), name='patient-treatment-history'),
-   # path('patient-treatment-history/<int:pk>/<int:p_id>',RUD_Patient_Treatment_History.as_view(), name ='patient-treatment-history'),
+   #path('patient-treatment-history/<int:pk>/<int:p_id>',RUD_Patient_Treatment_History.as_view(), name ='patient-treatment-history'),
     
     #path('articles/<int:year>/<int:month>/', views.month_archive),
     #path('articles/<int:year>/<int:emonth>/<slug:slug>/', views.article_detail),
