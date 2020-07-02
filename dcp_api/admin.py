@@ -14,11 +14,15 @@ from dcp_api.models import *
 # class treatment_plan_tableAdmin(admin.ModelAdmin):
 #     list_display = ['id','t_id','d_id','treatment_name','treatment_amount',]
 
-admin.site.register(pat_profile_table),
-admin.site.register(med_profile_table),
-admin.site.register(doc_profile_table),
-admin.site.register(treatment_plan_table),
-admin.site.register(pat_treatment_history_table),
+admin.site.register(PatientProfile),
+admin.site.register(DoctorProfile),
+admin.site.register(DoctorClinic),
+admin.site.register(PatientMedicalProfile),
+admin.site.register(Complaints),
+admin.site.register(DoctorSpecialization),
+admin.site.register(WorkDoneLog),
+admin.site.register(Visits),
+admin.site.register(Prescription)
 
 
 

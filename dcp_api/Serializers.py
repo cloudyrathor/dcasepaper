@@ -23,7 +23,8 @@ class PatientMedicalProfileSerializer(serializers.ModelSerializer):
     Patient = PatientProfileSerializer(read_only=True) 
     class Meta:
         model = PatientMedicalProfile
-        fields = '__all__'
+        fields = '__all__'    
+    
 
 class ComplaintsSerializer(serializers.ModelSerializer):
 

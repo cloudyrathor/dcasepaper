@@ -65,7 +65,7 @@ class Visits(models.Model):
     Is_Visited = models.BooleanField
     Visit_Type = models.CharField(max_length=64)
 
-class Prescription(models.model):
+class Prescription(models.Model):
     Patient = models.ForeignKey(PatientProfile ,on_delete=models.CASCADE)
     Visit = models.ForeignKey(Visits ,on_delete=models.CASCADE)
     DrugName =  models.CharField(max_length=64)
