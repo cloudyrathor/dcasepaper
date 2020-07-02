@@ -50,6 +50,8 @@ class Post_Patient_Treatment_History(generics.ListCreateAPIView):#Patient_Histor
     ordering = ('visit_date',)
     filter_fields = ('p_id','d_id','t_id','d__d_name')
 
+    .
+
 # class RUD_Patient_Treatment_History(generics.RetrieveUpdateDestroyAPIView):#Patient_History #Single object GET + Update (PUT) + Delete
 #     queryset = pat_treatment_history_table.objects.all()
 #     serializer_class = pat_treatment_history_tableSerializer
