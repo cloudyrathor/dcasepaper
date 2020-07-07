@@ -2,7 +2,9 @@ from django.urls import path
 from dcp_api.views import *
 
 urlpatterns = [
-    path('patient-medical-post/',PatientMedicalProfileListView.as_view(), name='patient-medical-post')
+    
+    path('patient-with-medical-profile/',PatientProfileListView.as_view(), name='patient-with-medical-profile'),
+    path('patient-with-medical-profile/<int:pk>',RUD_Patient.as_view(), name='patient-with-medical-profile')
 
     # path('patient-profile-list/',Post_Patients.as_view(), name='patient-profile-list'),   
     # path('patient-profile/<int:pk>/',RUD_Patient.as_view(), name ='patient-profile' ),
@@ -16,10 +18,12 @@ urlpatterns = [
     # path('treatment-new/',Post_Treatment.as_view(), name='treatment-new'),
     # path('treatment',RUD_Treatment.as_view(), name ='treatment'),
 
-#In_Process
+    #In_Process
+
     #path('patient-treatment-history/',Post_Patient_Treatment_History.as_view(), name='patient-treatment-history'),
-   #path('patient-treatment-history/<int:pk>/<int:p_id>',RUD_Patient_Treatment_History.as_view(), name ='patient-treatment-history'),
+    #path('patient-treatment-history/<int:pk>/<int:p_id>',RUD_Patient_Treatment_History.as_view(), name ='patient-treatment-history'),
     
     #path('articles/<int:year>/<int:month>/', views.month_archive),
     #path('articles/<int:year>/<int:emonth>/<slug:slug>/', views.article_detail),
+
 ]

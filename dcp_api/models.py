@@ -12,6 +12,10 @@ class PatientProfile(models.Model):
     P_MaritalStatus = models.CharField(max_length=200)
     P_Anniversary = models.DateField()
 
+    @property
+    def MedicalProfile(self):
+        return self.patientmedicalprofile_set.all()
+
 class DoctorProfile(models.Model):
     D_name = models.CharField(max_length=64)
     D_dob = models.DateField()

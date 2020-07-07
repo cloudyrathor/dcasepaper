@@ -55,10 +55,19 @@ from django_filters.rest_framework import DjangoFilterBackend
 # #     serializer_class = pat_treatment_history_tableSerializer
 # #     lookup_field = ['id','p_id'] 
 
+class PatientProfileListView(generics.ListCreateAPIView):
+    queryset = PatientProfile.objects.all()
+    serializer_class = PatientProfileSerializer
 
-class PatientMedicalProfileListView(generics.ListCreateAPIView):
+class RUD_Patient(generics.RetrieveUpdateDestroyAPIView):#Patient #Single object GET + Update (PUT) + Delete
+    queryset = PatientProfile.objects.all()
+    serializer_class = PatientProfileSerializer 
+
+class RUD_PatientMedProfile(generics.RetrieveUpdateDestroyAPIView): #Patient_Med_Profile #Single object GET + Update (PUT) + Delete
     queryset = PatientMedicalProfile.objects.all()
     serializer_class = PatientMedicalProfileSerializer
+    lookup_field = 'p_id'
+   
 
     
 
