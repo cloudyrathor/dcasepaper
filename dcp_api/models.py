@@ -56,7 +56,7 @@ class WorkDoneLog(models.Model):
     Doctor = models.ForeignKey(DoctorProfile ,on_delete=models.CASCADE)
     Complaint = models.ForeignKey(Complaints ,on_delete=models.CASCADE)
     Treatment = models.ForeignKey(DoctorSpecialization ,on_delete=models.CASCADE)
-    WorkDone_Time_Stamp = models.DateField()    
+    WorkDone_Time_Stamp = models.DateField()  
    
 class Visits(models.Model):
     Patient = models.ForeignKey(PatientProfile ,on_delete=models.CASCADE)

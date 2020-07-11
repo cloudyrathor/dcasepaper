@@ -3,8 +3,18 @@ from dcp_api.views import *
 
 urlpatterns = [
     
-    path('patient-with-medical-profile/',PatientProfileListView.as_view(), name='patient-with-medical-profile'),
-    path('patient-with-medical-profile/<int:pk>',RUD_Patient.as_view(), name='patient-with-medical-profile')
+
+
+
+    #-----------Patient with Nested Medical Profile-------------
+    path('patient-with-medical-profile/',PatientAndMedicalProfileListView.as_view(), name='patient-with-medical-profile-list'),
+    path('patient-with-medical-profile/<int:pk>',RUD_PatientAndMedicalProfile.as_view(), name='patient-with-medical-profile'),
+    #-----------Patient with Nested Medical Profile-------------
+
+    #-----------Work Done Logs-------------
+    path('Work-Done-Log/',WorkDoneLogListView.as_view(), name='work-done-log-list'),
+    #-----------End Work Done Logs-------------
+
 
     # path('patient-profile-list/',Post_Patients.as_view(), name='patient-profile-list'),   
     # path('patient-profile/<int:pk>/',RUD_Patient.as_view(), name ='patient-profile' ),

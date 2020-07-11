@@ -55,15 +55,59 @@ from django_filters.rest_framework import DjangoFilterBackend
 # #     serializer_class = pat_treatment_history_tableSerializer
 # #     lookup_field = ['id','p_id'] 
 
+
+#--------------------------Patient Model API classes---------------------------------
 class PatientProfileListView(generics.ListCreateAPIView):
     queryset = PatientProfile.objects.all()
     serializer_class = PatientProfileSerializer
 
-class RUD_Patient(generics.RetrieveUpdateDestroyAPIView):#Patient #Single object GET + Update (PUT) + Delete
+class RUD_PatientProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = PatientProfile.objects.all()
-    serializer_class = PatientProfileSerializer 
+    serializer_class = PatientProfileSerializer
+#--------------------------End Patient Model API classes------------------------------
 
-class RUD_PatientMedProfile(generics.RetrieveUpdateDestroyAPIView): #Patient_Med_Profile #Single object GET + Update (PUT) + Delete
+
+
+#--------------------------Patient Medical Profile Model API classes------------------
+class PatientMedicalProfileListView(generics.ListCreateAPIView):
+    queryset = PatientMedicalProfile.objects.all()
+    serializer_class = PatientMedicalProfileSerializer
+
+class RUD_PatientMedicalProfile(generics.RetrieveUpdateDestroyAPIView):
+    queryset = PatientMedicalProfile.objects.all()
+    serializer_class = PatientMedicalProfileSerializer
+#--------------------------Patient Medical Profile Model API classes------------------
+
+
+
+#--------------------------Doctor Profile Model API classes---------------------------
+class DoctorProfileListView(generics.ListCreateAPIView):
+    queryset = DoctorProfile.objects.all()
+    serializer_class = DoctorProfileSerializer
+
+class RUD_DoctorProfile(generics.RetrieveUpdateDestroyAPIView):
+    queryset = DoctorProfile.objects.all()
+    serializer_class = DoctorProfileSerializer
+#--------------------------End Doctor Profile Model API classes-------------------------
+
+
+
+
+
+class WorkDoneLogListView(generics.ListCreateAPIView):
+    queryset = WorkDoneLog.objects.all()
+    serializer_class = WorkDoneLogSerializer
+
+
+class PatientAndMedicalProfileListView(generics.ListCreateAPIView):
+    queryset = PatientProfile.objects.all()
+    serializer_class = PatientAndMedicalProfileSerializer
+
+class RUD_PatientAndMedicalProfile(generics.RetrieveUpdateDestroyAPIView):
+    queryset = PatientProfile.objects.all()
+    serializer_class = PatientAndMedicalProfileSerializer 
+
+class RUD_PatientMedProfile(generics.RetrieveUpdateDestroyAPIView): 
     queryset = PatientMedicalProfile.objects.all()
     serializer_class = PatientMedicalProfileSerializer
     lookup_field = 'p_id'
