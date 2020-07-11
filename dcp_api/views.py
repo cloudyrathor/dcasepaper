@@ -4,6 +4,12 @@ from dcp_api.Serializers import *
 from rest_framework.filters import SearchFilter
 from rest_framework.filters import OrderingFilter 
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework_bulk import (
+
+    ListBulkCreateUpdateDestroyAPIView
+)
+
+
 
 # class Post_Patients(generics.ListCreateAPIView):#Patient #Single object insert + GET(List of Object's)
 #     queryset = pat_profile_table.objects.all()
@@ -92,9 +98,7 @@ class RUD_DoctorProfile(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-
-
-class WorkDoneLogListView(generics.ListCreateAPIView):
+class WorkDoneLogListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreateAPIView):
     queryset = WorkDoneLog.objects.all()
     serializer_class = WorkDoneLogSerializer
 

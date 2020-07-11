@@ -16,6 +16,7 @@ class PatientProfile(models.Model):
     def MedicalProfile(self):
         return self.patientmedicalprofile_set.all()
 
+
 class DoctorProfile(models.Model):
     D_name = models.CharField(max_length=64)
     D_dob = models.DateField()
@@ -52,7 +53,7 @@ class DoctorSpecialization(models.Model):
     Treatment_Amount = models.IntegerField()
 
 class WorkDoneLog(models.Model): 
-    Patient = models.ForeignKey(PatientProfile ,on_delete=models.CASCADE)
+    Patient = models.ForeignKey(PatientProfile,on_delete=models.CASCADE)
     Doctor = models.ForeignKey(DoctorProfile ,on_delete=models.CASCADE)
     Complaint = models.ForeignKey(Complaints ,on_delete=models.CASCADE)
     Treatment = models.ForeignKey(DoctorSpecialization ,on_delete=models.CASCADE)

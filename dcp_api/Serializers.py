@@ -1,5 +1,9 @@
 from rest_framework import serializers 
 from .models import *
+from rest_framework_bulk import (
+    BulkListSerializer,
+    BulkSerializerMixin
+)
 
 class PatientProfileSerializer(serializers.ModelSerializer):
     
@@ -125,8 +129,19 @@ class DoctorSpecializationSerializer(serializers.ModelSerializer):
         model = DoctorSpecialization
         fields = '__all__'
 
-class WorkDoneLogSerializer(serializers.ModelSerializer):
 
+#------------------Work Done Log POST---------------------
+#----------------------Bulk Post And Update-----------------
+
+class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
+    
+    #..........Write Only fields for create update  
+    Patient_Id = serializers.IntegerField(write_only = True)
+    Doctor_Id = serializers.IntegerField(write_only = True)
+    Complaint_Id = serializers.IntegerField(write_only = True)
+    Treatment_Id = serializers.IntegerField(write_only = True)
+
+    #..........Read_Only for get 
     Patient = PatientProfileSerializer(read_only=True)
     Doctor = DoctorProfileSerializer(read_only=True)    
     Complaint = ComplaintsSerializer(read_only=True)
@@ -134,7 +149,41 @@ class WorkDoneLogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = WorkDoneLog
-        fields = '__all__'
+        list_serializer_class = BulkListSerializer # 
+        fields = ['id',
+                  'Patient_Id',
+                  'Doctor_Id',
+                  'Complaint_Id',
+                  'Treatment_Id',                  
+                  'Patient',
+                  'Doctor',
+                  'Complaint',
+                  'Treatment',
+                  'WorkDone_Time_Stamp']
+
+    #------------This Method is written for (write_only) field Manupulation------------ 
+    def create(self, validated_data):
+        
+        #...........Removing this values
+        patient = validated_data.pop('Patient_Id') 
+        doctor = validated_data.pop('Doctor_Id')
+        complaint = validated_data.pop('Complaint_Id')
+        treatment = validated_data.pop('Treatment_Id')
+        
+        #...........Geting instance from the respected field table
+        patient_instance = PatientProfile.objects.get(id=patient)
+        doctor_instance = DoctorProfile.objects.get(id=doctor)
+        complaint_instance = Complaints.objects.get(id=complaint)
+        treatment_instance = DoctorSpecialization.objects.get(id=treatment)
+
+        #...........Performin insert operation 
+        workdonelog_instance = WorkDoneLog.objects.create(**validated_data, Patient = patient_instance, Doctor = doctor_instance, Complaint = complaint_instance, Treatment = treatment_instance)
+        
+        return workdonelog_instance    
+
+
+
+
 
 class VisitsSerializer(serializers.ModelSerializer):                                                                                                                                                                                                               
 

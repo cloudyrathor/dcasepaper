@@ -19,8 +19,8 @@ urlpatterns = [
     # path('patient-profile-list/',Post_Patients.as_view(), name='patient-profile-list'),   
     # path('patient-profile/<int:pk>/',RUD_Patient.as_view(), name ='patient-profile' ),
 
-    # path('patient-medical-post/',Post_PatientMedProfile.as_view(), name='patient-medical-post'),   
-    # path('patient-medical-profile/<int:p_id>/',RUD_PatientMedProfile.as_view(), name ='patient-medical-profile' ),
+    path('patient-medical/',PatientMedicalProfileListView.as_view(), name='patient-medical-post'),   
+    path('patient-medical-profile/<int:p_id>/',RUD_PatientMedProfile.as_view(), name ='patient-medical-profile' ),
 
     # path('doctor-profile-list/',Post_Doctors.as_view(), name='doctor-profile-list'),
     # path('doctor-profile/<int:pk>/',RUD_Doctors.as_view(), name ='doctor-profile'),
