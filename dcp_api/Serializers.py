@@ -11,6 +11,7 @@ class PatientProfileSerializer(serializers.ModelSerializer):
         model = PatientProfile
         fields = '__all__'
 
+
 #------------------------------ Patient Medical Profile Model Serializer--------------------------
 class PatientMedicalProfileSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
@@ -26,6 +27,7 @@ class PatientMedicalProfileSerializer(serializers.ModelSerializer):
         read_only_fields = ('Patient',)          
 #------------------------------End Patient Medical Profile Model Serializer--------------------------        
      
+
 #---------------(Create and Update Methods) Patient And Nested Patient Medical Profile Mix Serializer---------------------
 class PatientAndMedicalProfileSerializer(serializers.ModelSerializer):
 
@@ -130,7 +132,7 @@ class DoctorSpecializationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-#------------------Work Done Log POST---------------------
+#------------------Work Done Log POST-----------------------
 #----------------------Bulk Post And Update-----------------
 
 class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
@@ -181,7 +183,7 @@ class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
         
         return workdonelog_instance    
 
-
+#------------------- End Work Done Log POST-----------------
 
 
 

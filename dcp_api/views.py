@@ -5,10 +5,8 @@ from rest_framework.filters import SearchFilter
 from rest_framework.filters import OrderingFilter 
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_bulk import (
-
-    ListBulkCreateUpdateDestroyAPIView
+  ListBulkCreateUpdateDestroyAPIView
 )
-
 
 
 # class Post_Patients(generics.ListCreateAPIView):#Patient #Single object insert + GET(List of Object's)
@@ -62,7 +60,7 @@ from rest_framework_bulk import (
 # #     lookup_field = ['id','p_id'] 
 
 
-#--------------------------Patient Model API classes---------------------------------
+#--------------------------Patient Model API classes (List And CRUD)---------------------------------
 class PatientProfileListView(generics.ListCreateAPIView):
     queryset = PatientProfile.objects.all()
     serializer_class = PatientProfileSerializer
@@ -70,8 +68,7 @@ class PatientProfileListView(generics.ListCreateAPIView):
 class RUD_PatientProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = PatientProfile.objects.all()
     serializer_class = PatientProfileSerializer
-#--------------------------End Patient Model API classes------------------------------
-
+#--------------------------End Patient Model API classes (List And CRUD)------------------------------
 
 
 #--------------------------Patient Medical Profile Model API classes------------------
@@ -82,9 +79,19 @@ class PatientMedicalProfileListView(generics.ListCreateAPIView):
 class RUD_PatientMedicalProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = PatientMedicalProfile.objects.all()
     serializer_class = PatientMedicalProfileSerializer
+    lookup_field = 'p_id'
 #--------------------------Patient Medical Profile Model API classes------------------
 
 
+#-------------------------PatientAndMedicalProfile Nested Data List And CRUD-------------
+class PatientAndMedicalProfileListView(generics.ListCreateAPIView):
+    queryset = PatientProfile.objects.all()
+    serializer_class = PatientAndMedicalProfileSerializer
+
+class RUD_PatientAndMedicalProfile(generics.RetrieveUpdateDestroyAPIView):
+    queryset = PatientProfile.objects.all()
+    serializer_class = PatientAndMedicalProfileSerializer 
+#-------------------------END PatientAndMedicalProfile Nested Data List And CRUD-------------
 
 #--------------------------Doctor Profile Model API classes---------------------------
 class DoctorProfileListView(generics.ListCreateAPIView):
@@ -97,25 +104,19 @@ class RUD_DoctorProfile(generics.RetrieveUpdateDestroyAPIView):
 #--------------------------End Doctor Profile Model API classes-------------------------
 
 
-
+#--------------------------Work Done Log Model API Classes------------------------------
+#---------Work Done Log Post And List (Bulk POST And Update)...........
 class WorkDoneLogListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreateAPIView):
     queryset = WorkDoneLog.objects.all()
     serializer_class = WorkDoneLogSerializer
+#-----=---Work Done Log Single CRUD......................................
+class RUD_WorkDoneLog(generics.RetrieveUpdateDestroyAPIView):
+    queryset = WorkDoneLog.objects.all()
+    serializer_class = WorkDoneLogSerializer 
+#--------------------------End Work Done Log Model API Classes------------------------------
 
 
-class PatientAndMedicalProfileListView(generics.ListCreateAPIView):
-    queryset = PatientProfile.objects.all()
-    serializer_class = PatientAndMedicalProfileSerializer
 
-class RUD_PatientAndMedicalProfile(generics.RetrieveUpdateDestroyAPIView):
-    queryset = PatientProfile.objects.all()
-    serializer_class = PatientAndMedicalProfileSerializer 
-
-class RUD_PatientMedProfile(generics.RetrieveUpdateDestroyAPIView): 
-    queryset = PatientMedicalProfile.objects.all()
-    serializer_class = PatientMedicalProfileSerializer
-    lookup_field = 'p_id'
-   
 
     
 
