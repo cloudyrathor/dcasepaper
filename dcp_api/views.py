@@ -109,6 +109,9 @@ class RUD_DoctorProfile(generics.RetrieveUpdateDestroyAPIView):
 class WorkDoneLogListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreateAPIView):
     queryset = WorkDoneLog.objects.all()
     serializer_class = WorkDoneLogSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('id','Patient__id' )
+    
 #-----=---Work Done Log Single CRUD......................................
 class RUD_WorkDoneLog(generics.RetrieveUpdateDestroyAPIView):
     queryset = WorkDoneLog.objects.all()
