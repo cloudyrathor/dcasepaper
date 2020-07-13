@@ -118,10 +118,27 @@ class ComplaintsSerializer(serializers.ModelSerializer):
 
     Patient = PatientProfileSerializer(read_only=True) 
     Doctor = DoctorProfileSerializer(read_only=True)
+    Patient_Id = serializers.IntegerField(write_only = True)
+    Doctor_Id = serializers.IntegerField(write_only = True)
 
     class Meta:
         model = Complaints
-        fields = '__all__'
+        fields = ['id','Patient','Doctor','Patient_Id','Doctor_Id','C_TimeStamp','CompaintDetail']
+
+    def create(self, validated_data):
+        
+        #...........Removing this values
+        patient = validated_data.pop('Patient_Id') 
+        doctor = validated_data.pop('Doctor_Id')
+               
+        #...........Geting instance from the respected field table
+        patient_instance = PatientProfile.objects.get(id=patient)
+        doctor_instance = DoctorProfile.objects.get(id=doctor)
+      
+        #...........Performin insert operation 
+        complaint_instance = WorkDoneLog.objects.create(**validated_data, Patient = patient_instance, Doctor = doctor_instance)        
+        return complaint_instance    
+
 
 class DoctorSpecializationSerializer(serializers.ModelSerializer):
 

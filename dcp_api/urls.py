@@ -27,6 +27,10 @@ urlpatterns = [
     #-----------End Work Done Logs-------------
 
 
+    #-----------Complaint Model-------------
+    path('Complaints-List/',ComplaintsListView.as_view(), name='Complaints-list'),
+    path('Complaint/<int:pk>',RUD_Complaints.as_view(), name='Complaint'),
+    #-----------End Complaint Model-------------
 
 
 

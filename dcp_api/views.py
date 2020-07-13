@@ -121,6 +121,15 @@ class RUD_WorkDoneLog(generics.RetrieveUpdateDestroyAPIView):
 
 
 
+#--------------------------Complaint Model API classes (List And CRUD)---------------------------------
+class ComplaintsListView(generics.ListCreateAPIView):
+    queryset = Complaints.objects.all()
+    serializer_class = ComplaintsSerializer
+
+class RUD_Complaints(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Complaints.objects.all()
+    serializer_class = ComplaintsSerializer
+#--------------------------End Complaint Model API classes (List And CRUD)------------------------------
     
 
 
