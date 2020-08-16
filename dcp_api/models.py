@@ -11,11 +11,16 @@ class PatientProfile(models.Model):
     P_Family = models.CharField(max_length=200)
     P_MaritalStatus = models.CharField(max_length=200)
     P_Anniversary = models.DateField()
-
+    
+    #Medical Information
     @property
     def MedicalProfile(self):
         return self.patientmedicalprofile_set.all()
-
+    
+    #Visit Information
+    @property
+    def Appointment(self):
+        return self.visits_set.all()
 
 class DoctorProfile(models.Model):
     D_name = models.CharField(max_length=64)
@@ -52,13 +57,6 @@ class DoctorSpecialization(models.Model):
     Treatment_Name = models.CharField(max_length=128)
     Treatment_Amount = models.IntegerField()
 
-class WorkDoneLog(models.Model): 
-    Patient = models.ForeignKey(PatientProfile,on_delete=models.CASCADE)
-    Doctor = models.ForeignKey(DoctorProfile ,on_delete=models.CASCADE)
-    Complaint = models.ForeignKey(Complaints ,on_delete=models.CASCADE)
-    Treatment = models.ForeignKey(DoctorSpecialization ,on_delete=models.CASCADE)
-    WorkDone_Time_Stamp = models.DateField()  
-   
 class Visits(models.Model):
     Patient = models.ForeignKey(PatientProfile ,on_delete=models.CASCADE)
     Doctor = models.ForeignKey(DoctorProfile ,on_delete=models.CASCADE)
@@ -67,8 +65,18 @@ class Visits(models.Model):
     Visit_Time_Stamp = models.DateField()
     Details = models.CharField(max_length=1024)
     Advice = models.CharField(max_length=1024)
-    Is_Visited = models.BooleanField
+    Is_Visited = models.BooleanField(default=False)
     Visit_Type = models.CharField(max_length=64)
+
+
+class WorkDoneLog(models.Model): 
+    Patient = models.ForeignKey(PatientProfile,on_delete=models.CASCADE)
+    Doctor = models.ForeignKey(DoctorProfile ,on_delete=models.CASCADE)
+    Complaint = models.ForeignKey(Complaints ,on_delete=models.CASCADE)
+    Visits = models.ForeignKey(Visits ,on_delete=models.CASCADE)
+    Treatment = models.ForeignKey(DoctorSpecialization ,on_delete=models.CASCADE)
+    WorkDone_Time_Stamp = models.DateField()  
+   
 
 class Prescription(models.Model):
     Patient = models.ForeignKey(PatientProfile ,on_delete=models.CASCADE)
