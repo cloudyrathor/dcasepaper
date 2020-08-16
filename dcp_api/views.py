@@ -103,31 +103,6 @@ class RUD_DoctorProfile(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = DoctorProfileSerializer
 #--------------------------End Doctor Profile Model API classes-------------------------
 
-#--------------------------Work Done Log Model API Classes------------------------------
-#-----------------Work Done Log Post And List (Bulk POST And Update)--------------------
-class WorkDoneLogListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreateAPIView):
-    queryset = WorkDoneLog.objects.all()
-    serializer_class = WorkDoneLogSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('id','Patient__id' )
-    
-#-----=---------------------Work Done Log Single CRUD......................................
-class RUD_WorkDoneLog(generics.RetrieveUpdateDestroyAPIView):
-    queryset = WorkDoneLog.objects.all()
-    serializer_class = WorkDoneLogSerializer 
-#--------------------------End Work Done Log Model API Classes-----------------------------
-
-#--------------------------Complaint Model API classes (List And CRUD)---------------------
-class ComplaintsListView(generics.ListCreateAPIView):
-    queryset = Complaints.objects.all()
-    serializer_class = ComplaintsSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('id','Patient__id' )
-
-class RUD_Complaints(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Complaints.objects.all()
-    serializer_class = ComplaintsSerializer
-#--------------------------End Complaint Model API classes (List And CRUD)------------------------------
 
 
 #--------------------------Visit Model API Classes------------------------------    
@@ -141,4 +116,31 @@ class RUD_Visits(generics.RetrieveUpdateDestroyAPIView):
     queryset = Visits.objects.all()
     serializer_class = VisitsSerializer
 #--------------------------End Visit Model API Classes------------------------------
+
+#--------------------------Complaint Model API classes (List And CRUD)---------------------
+class ComplaintsListView(generics.ListCreateAPIView):
+    queryset = Complaints.objects.all()
+    serializer_class = ComplaintsSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('id','Patient__id')
+
+class RUD_Complaints(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Complaints.objects.all()
+    serializer_class = ComplaintsSerializer
+#--------------------------End Complaint Model API classes (List And CRUD)------------------------------
+
+
+#--------------------------Work Done Log Model API Classes------------------------------
+#-----------------Work Done Log Post And List (Bulk POST And Update)--------------------
+class WorkDoneLogListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreateAPIView):
+    queryset = WorkDoneLog.objects.all()
+    serializer_class = WorkDoneLogSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('id','Patient__id','Complaint__id','Visits__id')
+    
+#-----=---------------------Work Done Log Single CRUD......................................
+class RUD_WorkDoneLog(generics.RetrieveUpdateDestroyAPIView):
+    queryset = WorkDoneLog.objects.all()
+    serializer_class = WorkDoneLogSerializer 
+#--------------------------End Work Done Log Model API Classes-----------------------------
 

@@ -33,7 +33,10 @@ urlpatterns = [
     #-----------End Complaint Model-------------
 
 
-
+    #-----------Visit Model-------------
+    path('Visit-List/',VisitsListView.as_view(), name='Visit-list'),
+    path('Visit/<int:pk>',RUD_Visits.as_view(), name='Visit'),
+    #-----------End Visit Model-------------
 
     # path('patient-profile-list/',Post_Patients.as_view(), name='patient-profile-list'),   
     # path('patient-profile/<int:pk>/',RUD_Patient.as_view(), name ='patient-profile' ),
