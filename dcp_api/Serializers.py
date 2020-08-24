@@ -1,4 +1,5 @@
-from rest_framework import serializers 
+from rest_framework import serializers
+from rest_framework.serializers import SerializerMethodField
 from .models import *
 from rest_framework_bulk import (BulkListSerializer, BulkSerializerMixin)
 
@@ -169,8 +170,8 @@ class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
     Advice = serializers.CharField(allow_blank=True, max_length=500, required=False)
    
     #..........Read_Only for get 
-    Patient = PatientProfileSerializer(read_only=True)
-    Doctor = DoctorProfileSerializer(read_only=True)    
+    Patient = SerializerMethodField()
+    Doctor = DoctorProfileSerializer(read_only=True)        
     Complaint = ComplaintsSerializer(read_only=True)
     Treatment = DoctorSpecializationSerializer(read_only=True)
     #Visit = VisitsSerializer(read_only=True)
@@ -193,9 +194,11 @@ class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
                   'Details',
                   'Advice']
 
+    def get_Patient(self,obj):
+        return str(obj.Patient.P_Name)
+
     #------------This Method is written for (write_only) field Manupulation------------ 
-    def create(self, validated_data):
-        
+    def create(self, validated_data):        
         #...........Removing this values
         patient = validated_data.pop('Patient_Id') 
         doctor = validated_data.pop('Doctor_Id')
