@@ -152,9 +152,13 @@ class VisitsSerializer(serializers.ModelSerializer):
     Complaint = ComplaintsSerializer(read_only=True)
     Treatment = DoctorSpecializationSerializer(read_only=True)
 
+    
+
     class Meta:
         model = Visits
         fields = '__all__'
+
+    
 
 #------------------Work Done Log POST-----------------------
 #----------------------Bulk Post And Update-----------------
@@ -171,10 +175,15 @@ class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
    
     #..........Read_Only for get 
     Patient = SerializerMethodField()
-    Doctor = DoctorProfileSerializer(read_only=True)        
-    Complaint = ComplaintsSerializer(read_only=True)
-    Treatment = DoctorSpecializationSerializer(read_only=True)
-    #Visit = VisitsSerializer(read_only=True)
+    Doctor=SerializerMethodField()
+    #Doctor = DoctorProfileSerializer(read_only=True)
+    Complaint=SerializerMethodField()  
+    #Complaint = ComplaintsSerializer(read_only=True)
+    Treatment=SerializerMethodField()
+    #Treatment = DoctorSpecializationSerializer(read_only=True)
+    Visits = SerializerMethodField()
+
+    #Prescription=SerializerMethodField()
 
     class Meta:
         model = WorkDoneLog
@@ -195,8 +204,26 @@ class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
                   'Advice']
 
     def get_Patient(self,obj):
-        return str(obj.Patient.P_Name)
+        my_dict={'id':obj.Patient.id,'name':obj.Patient.P_Name}
+        return my_dict
 
+    def get_Doctor(self,obj):
+        doctor_dict={'id':obj.Doctor.id,'dname':obj.Doctor.D_name}
+        return doctor_dict
+
+    def get_Complaint(self,obj):
+        complaint_dict={'id':obj.Complaint.id,'timestamp':obj.Complaint.C_TimeStamp,'details':obj.Complaint.CompaintDetail}
+        return complaint_dict
+
+    def get_Treatment(self,obj):
+        treatment_dict={'id':obj.Treatment.id,'Treatment_name':obj.Treatment.Treatment_Name,'Treatement_Amt':obj.Treatment.Treatment_Amount}
+        return treatment_dict
+
+    def get_Visits(self,obj):
+        visits_dict={'id':obj.Visits.id,'advice':obj.Visits.Advice}
+        return visits_dict
+    
+     
     #------------This Method is written for (write_only) field Manupulation------------ 
     def create(self, validated_data):        
         #...........Removing this values
