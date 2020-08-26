@@ -42,8 +42,8 @@ urlpatterns = [
 
     #-----------Prescription Model-------------
     #---------Bulk Post 
-    path('Prescription-List/',VisitsListView.as_view(), name='Visit-list'),
-    path('Prescription/<int:pk>',RUD_Visits.as_view(), name='Visit'),
+    path('Prescription-List/',PrescriptionListView.as_view(), name='Prescription -list'),
+    path('Prescription/<int:pk>',RUD_Prescription.as_view(), name='Prescription'),
     #-----------End Visit Model-------------
 
     # path('patient-profile-list/',Post_Patients.as_view(), name='patient-profile-list'),   
