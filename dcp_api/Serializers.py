@@ -156,7 +156,7 @@ class VisitsSerializer(serializers.ModelSerializer):
         model = Visits
         fields = '__all__'
    
-   
+
 #------------------Work Done Log POST-----------------------
 #----------------------Bulk Post And Update-----------------
 class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
@@ -213,7 +213,7 @@ class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
         return complaint_dict
 
     def get_Treatment(self,obj):
-        treatment_dict={'id':obj.Treatment.id,'Treatment_name':obj.Treatment.Treatment_Name,'Treatement_Amt':obj.Treatment.Treatment_Amount}
+        treatment_dict={'id':obj.Treatment.id,'Treatment_name':obj.Treatment.Treatment_Name,'Treatment_Amt':obj.Treatment.Treatment_Amount}
         return treatment_dict
 
     def get_Visits(self,obj):
