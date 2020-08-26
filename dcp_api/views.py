@@ -144,3 +144,14 @@ class RUD_WorkDoneLog(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = WorkDoneLogSerializer 
 #--------------------------End Work Done Log Model API Classes-----------------------------
 
+#--------------------------Prescription Model API classes (List And CRUD)---------------------
+class PrescriptionListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreateAPIView):
+    queryset = Prescription.objects.all()
+    serializer_class = PrescriptionSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('id','Visit__id','Patient__id')
+
+class RUD_Prescription(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Prescription.objects.all()
+    serializer_class = PrescriptionSerializer
+#--------------------------End Prescription Model API classes (List And CRUD)------------------------------

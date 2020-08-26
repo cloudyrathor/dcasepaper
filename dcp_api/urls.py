@@ -22,6 +22,7 @@ urlpatterns = [
 
 
     #-----------Work Done Logs-------------
+    #---------Bulk Post 
     path('Work-Done-Log/',WorkDoneLogListView.as_view(), name='work-done-log-list'),
     path('Work-Done-Log/<int:pk>',RUD_WorkDoneLog.as_view(), name='work-done-log'),
     #-----------End Work Done Logs-------------
@@ -36,6 +37,13 @@ urlpatterns = [
     #-----------Visit Model-------------
     path('Visit-List/',VisitsListView.as_view(), name='Visit-list'),
     path('Visit/<int:pk>',RUD_Visits.as_view(), name='Visit'),
+    #-----------End Visit Model-------------
+
+
+    #-----------Prescription Model-------------
+    #---------Bulk Post 
+    path('Prescription-List/',VisitsListView.as_view(), name='Visit-list'),
+    path('Prescription/<int:pk>',RUD_Visits.as_view(), name='Visit'),
     #-----------End Visit Model-------------
 
     # path('patient-profile-list/',Post_Patients.as_view(), name='patient-profile-list'),   

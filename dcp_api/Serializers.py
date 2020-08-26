@@ -150,16 +150,13 @@ class VisitsSerializer(serializers.ModelSerializer):
     Patient = PatientProfileSerializer(read_only=True)
     Doctor = DoctorProfileSerializer(read_only=True)    
     Complaint = ComplaintsSerializer(read_only=True)
-    Treatment = DoctorSpecializationSerializer(read_only=True)
-
-    
+    Treatment = DoctorSpecializationSerializer(read_only=True)    
 
     class Meta:
         model = Visits
         fields = '__all__'
-
-    
-
+   
+   
 #------------------Work Done Log POST-----------------------
 #----------------------Bulk Post And Update-----------------
 class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
@@ -256,13 +253,35 @@ class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
         return workdonelog_instance    
 
 #-------------------End Work Done Log POST------------------
-class PrescriptionSerializer(serializers.ModelSerializer):
+
+#----------------------Prescription Bulk POST + Update----------------
+class PrescriptionSerializer(BulkSerializerMixin,serializers.ModelSerializer):
+    Patient_Id = serializers.IntegerField(write_only = True)
+    Visit_Id = serializers.IntegerField(write_only = True)
+
 
     Patient = PatientProfileSerializer(read_only=True)
     Visit = VisitsSerializer(read_only=True)    
   
     class Meta:
         model = Prescription
-        fields = '__all__'
+        fields = ['id',
+                  'Patient',
+                  'Visit',
+                  'Patient_Id',
+                  'Visit_Id'
+                  'DrugName',
+                  'Duration',
+                  'Dose']
 
+    def create(self, validated_data):
+        patient = validated_data.pop('Patient_Id') 
+        visit = validated_data.pop('Visit_Id')
+
+        patient_instance = PatientProfile.objects.get(id=patient)
+        visit_instance = Visits.objects.get(id=visit)
+
+        prescription_instance = Prescription.objects.create(**validated_data,Patient=patient_instance, Visit=visit_instance)
+        return prescription_instance
+#----------------------End Prescription Bulk POST + Update----------------
 
