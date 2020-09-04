@@ -240,7 +240,7 @@ class PrescriptionListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreat
             # print(Patient)
             # print(Doctor)
             # print(Visits)
-            response.data = {"Prescription":{"Patient":Patient[0],"Doctor":Doctor[0].get('Doctor'),"prescripton_data":response.data}}
+            response.data = {"Prescription":{"Patient":Patient[0],"Doctor":Doctor[0].get('Doctor'),"Prescription_data":response.data}}
             return response
 
 
