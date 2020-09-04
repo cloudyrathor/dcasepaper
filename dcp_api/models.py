@@ -86,3 +86,6 @@ class Prescription(models.Model):
     Dose =  models.CharField(max_length=64)
 
 
+    
+
+

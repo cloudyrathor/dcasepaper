@@ -216,7 +216,32 @@ class PrescriptionListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreat
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('id','Visit__id','Patient__id')
 
-    
+
+    def list(self, request, *args, **kwargs):
+            # call the original 'list' to get the original response
+            response = super(PrescriptionListView, self).list(request, *args, **kwargs)
+            # customize the response data
+
+            # response.data = {"people": response.data}
+            # return response with this custom representation
+            Patient_data = []
+            Doctor_data = []
+        
+            for row in response.data:
+                Patient_data.append(row.pop('Patient'))
+                Doctor_data.append(row.pop('Visit'))
+        
+            # print(Treatment_data)
+
+            Patient = [i for n, i in enumerate(Patient_data) if i not in Patient_data[n + 1:]]
+            Doctor = [i for n, i in enumerate(Doctor_data) if i not in Doctor_data[n + 1:]]
+        
+            #WorkDone_Time_Stamp = [i for n, i in enumerate(WorkDone_Time_Stamp_data) if i not in WorkDone_Time_Stamp_data[n + 1:]]
+            # print(Patient)
+            # print(Doctor)
+            # print(Visits)
+            response.data = {"Prescription":{"Patient":Patient[0],"Doctor":Doctor[0].get('Doctor'),"prescripton_data":response.data}}
+            return response
 
 
 class RUD_Prescription(generics.RetrieveUpdateDestroyAPIView):
