@@ -259,20 +259,33 @@ class PrescriptionSerializer(BulkSerializerMixin,serializers.ModelSerializer):
     Patient_Id = serializers.IntegerField(write_only = True)
     Visit_Id = serializers.IntegerField(write_only = True)
 
-
     Patient = PatientProfileSerializer(read_only=True)
+    #Patient = SerializerMethodField()
+    Doctor = SerializerMethodField()
     Visit = VisitsSerializer(read_only=True)    
   
     class Meta:
         model = Prescription
         fields = ['id',
                   'Patient',
-                  'Visit',
+                  'Doctor',
+                  'Visit',                  
                   'Patient_Id',
-                  'Visit_Id'
+                  'Visit_Id',
                   'DrugName',
                   'Duration',
                   'Dose']
+
+
+    def get_Patient(self,obj):
+        my_dict = {'Patient':obj.Visit.Patient}
+        return my_dict
+
+    def get_Doctor(self,obj):
+        my_dict = {'Patient':obj.Visit.Doctor}
+        #doctor_dict={'id':obj.Doctor.id,'dname':obj.Doctor.D_name}
+        return my_dict
+
 
     def create(self, validated_data):
         patient = validated_data.pop('Patient_Id') 
