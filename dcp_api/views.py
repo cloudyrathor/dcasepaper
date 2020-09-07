@@ -105,7 +105,6 @@ class RUD_DoctorProfile(generics.RetrieveUpdateDestroyAPIView):
 #--------------------------End Doctor Profile Model API classes-------------------------
 
 
-
 #--------------------------Visit Model API Classes------------------------------
 class VisitsListView(generics.ListCreateAPIView):
     queryset = Visits.objects.all()
@@ -117,6 +116,7 @@ class RUD_Visits(generics.RetrieveUpdateDestroyAPIView):
     queryset = Visits.objects.all()
     serializer_class = VisitsSerializer
 #--------------------------End Visit Model API Classes------------------------------
+
 
 #--------------------------Complaint Model API classes (List And CRUD)---------------------
 class ComplaintsListView(generics.ListCreateAPIView):
@@ -157,7 +157,6 @@ class RUD_Complaints(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ComplaintsSerializer
 #--------------------------End Complaint Model API classes (List And CRUD)------------------------------
 
-
 #--------------------------Work Done Log Model API Classes------------------------------
 #-----------------Work Done Log Post And List (Bulk POST And Update)--------------------
 class WorkDoneLogListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreateAPIView):
@@ -185,7 +184,7 @@ class WorkDoneLogListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreate
             Doctor_data.append(row.pop('Doctor'))
             Visit_data.append(row.pop('Visits'))
             Complaint_data.append(row.pop('Complaint'))
-            #WorkDone_Time_Stamp_data.append(row.pop('WorkDone_Time_Stamp'))
+            WorkDone_Time_Stamp_data.append(row.pop('WorkDone_Time_Stamp'))
             Treatment_data.append(row.pop('Treatment'))
             
            # print(Treatment_data)
@@ -194,21 +193,19 @@ class WorkDoneLogListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreate
         Doctor = [i for n, i in enumerate(Doctor_data) if i not in Doctor_data[n + 1:]]
         Visits = [i for n, i in enumerate(Visit_data) if i not in Visit_data[n + 1:]]
         Complaint = [i for n, i in enumerate(Complaint_data) if i not in Complaint_data[n + 1:]] 
-        #WorkDone_Time_Stamp = [i for n, i in enumerate(WorkDone_Time_Stamp_data) if i not in WorkDone_Time_Stamp_data[n + 1:]]
+        WorkDone_Time_Stamp = [i for n, i in enumerate(WorkDone_Time_Stamp_data) if i not in WorkDone_Time_Stamp_data[n + 1:]]
         # print(Patient)
         # print(Doctor)
         # print(Visits)
 
-        response.data = {"WorkDone":{"Patient":Patient[0],"Doctor":Doctor[0],"Visits":Visits[0],"Complaint":Complaint[0],"Treatments":Treatment_data,"WorkDone_Time_Stamp":response.data}}
+        response.data = {"WorkDone":{"Patient":Patient[0],"Doctor":Doctor[0],"Visits":Visits[0],"Complaint":Complaint[0],WorkDone_Time_Stamp[0]:Treatment_data,}}
         return response
 
-
-#-----=---------------------Work Done Log Single CRUD......................................
+#--------------------------Work Done Log Single CRUD..........................................
 class RUD_WorkDoneLog(generics.RetrieveUpdateDestroyAPIView):
     queryset = WorkDoneLog.objects.all()
     serializer_class = WorkDoneLogSerializer
-#--------------------------End Work Done Log Model API Classes-----------------------------
-
+#--------------------------End Work Done Log Model API Classes--------------------------------
 #--------------------------Prescription Model API classes (List And CRUD)---------------------
 class PrescriptionListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreateAPIView):
     queryset = Prescription.objects.all()
@@ -216,12 +213,10 @@ class PrescriptionListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreat
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('id','Visit__id','Patient__id')
 
-
     def list(self, request, *args, **kwargs):
             # call the original 'list' to get the original response
             response = super(PrescriptionListView, self).list(request, *args, **kwargs)
             # customize the response data
-
             # response.data = {"people": response.data}
             # return response with this custom representation
             Patient_data = []
@@ -229,22 +224,15 @@ class PrescriptionListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreat
         
             for row in response.data:
                 Patient_data.append(row.pop('Patient'))
-                Doctor_data.append(row.pop('Visit'))
-        
-            # print(Treatment_data)
+                Doctor_data.append(row.pop('Visit'))    
 
             Patient = [i for n, i in enumerate(Patient_data) if i not in Patient_data[n + 1:]]
             Doctor = [i for n, i in enumerate(Doctor_data) if i not in Doctor_data[n + 1:]]
         
-            #WorkDone_Time_Stamp = [i for n, i in enumerate(WorkDone_Time_Stamp_data) if i not in WorkDone_Time_Stamp_data[n + 1:]]
-            # print(Patient)
-            # print(Doctor)
-            # print(Visits)
             response.data = {"Prescription":{"Patient":Patient[0],"Doctor":Doctor[0].get('Doctor'),"Prescription_data":response.data}}
             return response
-
 
 class RUD_Prescription(generics.RetrieveUpdateDestroyAPIView):
     queryset = Prescription.objects.all()
     serializer_class = PrescriptionSerializer
-#--------------------------End Prescription Model API classes (List And CRUD)------------------------------
+#--------------------------End Prescription Model API classes (List And CRUD)------------------

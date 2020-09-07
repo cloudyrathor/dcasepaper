@@ -170,7 +170,7 @@ class WorkDoneLogSerializer(BulkSerializerMixin,serializers.ModelSerializer):
     Details = serializers.CharField(allow_blank=True, max_length=500, required=False)
     Advice = serializers.CharField(allow_blank=True, max_length=500, required=False)
    
-    #..........Read_Only for get 
+    #........................Read_Only for get.................
     Patient = SerializerMethodField()
     Doctor=SerializerMethodField()
     #Doctor = DoctorProfileSerializer(read_only=True)
