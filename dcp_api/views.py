@@ -198,7 +198,7 @@ class WorkDoneLogListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreate
         # print(Doctor)
         # print(Visits)
 
-        response.data = {"WorkDone":{"Patient":Patient[0],"Doctor":Doctor[0],"Visits":Visits[0],"Complaint":Complaint[0],"WDate":{WorkDone_Time_Stamp[0]:Treatment_data}}}
+        response.data = {"WorkDone":{"Patient":Patient[0],"Doctor":Doctor[0],"Visits":Visits[0],"Complaint":Complaint[0],"WDate":{WorkDone_Time_Stamp[0]:Treatment_data,"advice":Visits[0].get("advice"),"advice":Visits[0].get("advice"),"details":Complaint[0].get("details"),"Visit_id":Visits[0].get("id")}}}
         return response
 
 #--------------------------Work Done Log Single CRUD..........................................
