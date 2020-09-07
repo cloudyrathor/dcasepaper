@@ -186,6 +186,7 @@ class WorkDoneLogListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreate
             Complaint_data.append(row.pop('Complaint'))
             WorkDone_Time_Stamp_data.append(row.pop('WorkDone_Time_Stamp'))
             Treatment_data.append(row.pop('Treatment'))
+            print(WorkDone_Time_Stamp_data)
             
            # print(Treatment_data)
 
@@ -194,11 +195,10 @@ class WorkDoneLogListView(ListBulkCreateUpdateDestroyAPIView,generics.ListCreate
         Visits = [i for n, i in enumerate(Visit_data) if i not in Visit_data[n + 1:]]
         Complaint = [i for n, i in enumerate(Complaint_data) if i not in Complaint_data[n + 1:]] 
         WorkDone_Time_Stamp = [i for n, i in enumerate(WorkDone_Time_Stamp_data) if i not in WorkDone_Time_Stamp_data[n + 1:]]
-        # print(Patient)
         # print(Doctor)
         # print(Visits)
 
-        response.data = {"WorkDone":{"Patient":Patient[0],"Doctor":Doctor[0],"Visits":Visits[0],"Complaint":Complaint[0],WorkDone_Time_Stamp[0]:Treatment_data,}}
+        response.data = {"WorkDone":{"Patient":Patient[0],"Doctor":Doctor[0],"Visits":Visits[0],"Complaint":Complaint[0],"WDate":{WorkDone_Time_Stamp[0]:Treatment_data}}}
         return response
 
 #--------------------------Work Done Log Single CRUD..........................................
